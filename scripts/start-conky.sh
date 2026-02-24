@@ -24,13 +24,17 @@ pkill -f "conky-cava-writer" 2>/dev/null || true
 
 # keep only the latest cava line in file (overwrite on each frame)
 : > "$CAVA_FILE"
-bash -c '
-  exec -a conky-cava-writer stdbuf -oL cava 2>/dev/null | \
-  while IFS= read -r line; do
-    printf "%s\n" "$line" > "'"$CAVA_TMP_FILE"'"
-    mv -f "'"$CAVA_TMP_FILE"'" "'"$CAVA_FILE"'"
-  done
-' >/dev/null 2>&1 &
+(
+  stdbuf -oL cava 2>/dev/null | \
+  exec -a conky-cava-writer awk -v out="$CAVA_FILE" -v tmp="$CAVA_TMP_FILE" '
+    {
+      print $0 > tmp
+      close(tmp)
+      cmd = "mv -f \"" tmp "\" \"" out "\""
+      system(cmd)
+    }
+  '
+) >/dev/null 2>&1 &
 echo $! > "$CAVA_PID_FILE"
 
 for p in "${PROJECTS[@]}"; do
