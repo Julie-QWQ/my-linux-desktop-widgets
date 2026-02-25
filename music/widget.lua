@@ -13,6 +13,7 @@ local BAR_GAP = BAR_WIDTH * 0.5
 local MAX_LEVEL = 96
 local PX_PER_LEVEL = 6
 local MAX_HEIGHT = MAX_LEVEL * PX_PER_LEVEL
+local MIN_BAR_HEIGHT = 2
 
 -- Style
 local SHADOW_RGBA = {0.0, 0.0, 0.0, 0.1}
@@ -85,7 +86,9 @@ local function color_for_bar(index)
 end
 
 local function draw_bar(cr, x, baseline_y, bar_h, rgba)
-  if bar_h <= 0 then return end
+  if bar_h <= 0 then
+    bar_h = MIN_BAR_HEIGHT
+  end
 
   local base_a = SHADOW_RGBA[4] or 0
   if base_a > 0 then

@@ -85,46 +85,10 @@ conky -c ~/.config/conky/music/conky.conf
 ## 开机自启动
 推荐使用 `systemd --user`，稳定且便于重启后恢复。
 
-### 方案 A：systemd --user（推荐）
-1. 创建用户服务文件：
-```bash
-mkdir -p ~/.config/systemd/user
-cat > ~/.config/systemd/user/conky-suite.service <<'UNIT'
-[Unit]
-Description=Conky Multi-Instance Suite
-After=graphical-session.target
-Wants=graphical-session.target
-
-[Service]
-Type=oneshot
-ExecStart=/bin/bash /home/julie/.config/conky/scripts/start-conky.sh
-ExecStop=/bin/bash /home/julie/.config/conky/scripts/stop-conky.sh
-RemainAfterExit=yes
-TimeoutStartSec=20
-TimeoutStopSec=20
-
-[Install]
-WantedBy=default.target
-UNIT
-```
-
-2. 启用并立即启动：
-```bash
-systemctl --user daemon-reload
-systemctl --user enable --now conky-suite.service
-```
-
-3. 常用管理命令：
-```bash
-systemctl --user status conky-suite.service
-systemctl --user restart conky-suite.service
-systemctl --user stop conky-suite.service
-```
-
-### 方案 B：桌面“启动应用”
+### 方案：桌面“启动应用”
 在 GNOME 的“启动应用”里新增一项，命令填：
 ```bash
 /bin/bash /home/julie/.config/conky/scripts/start-conky.sh
 ```
 
-说明：方案 B 简单，但可观测性和控制能力弱于 `systemd --user`。
+说明：使用 systed 启动可能存在问题。
