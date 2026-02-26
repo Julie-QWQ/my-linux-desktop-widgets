@@ -13,25 +13,25 @@ local BAR_GAP = BAR_WIDTH * 0.5
 local MAX_LEVEL = 96
 local PX_PER_LEVEL = 6
 local MAX_HEIGHT = MAX_LEVEL * PX_PER_LEVEL
-local MIN_BAR_HEIGHT = 2
+local MIN_BAR_HEIGHT = 4
 
 -- Style
 local SHADOW_RGBA = {0.0, 0.0, 0.0, 0.1}
 local SHADOW_DX = 3
 local SHADOW_DY = 3
 local BAR_COLORS = {
-  {0.29, 0.72, 0.92, 0.5},
-  {0.33, 0.70, 0.92, 0.5},
-  {0.36, 0.68, 0.92, 0.5},
-  {0.40, 0.66, 0.92, 0.5},
-  {0.44, 0.64, 0.92, 0.5},
-  {0.48, 0.62, 0.92, 0.5},
-  {0.51, 0.59, 0.92, 0.5},
-  {0.55, 0.57, 0.92, 0.5},
-  {0.59, 0.55, 0.92, 0.5},
-  {0.63, 0.53, 0.92, 0.5},
-  {0.66, 0.51, 0.92, 0.5},
-  {0.70, 0.49, 0.92, 0.5},
+  {0.29, 0.72, 0.92, 0.65},
+  {0.33, 0.70, 0.92, 0.65},
+  {0.36, 0.68, 0.92, 0.65},
+  {0.40, 0.66, 0.92, 0.65},
+  {0.44, 0.64, 0.92, 0.65},
+  {0.48, 0.62, 0.92, 0.65},
+  {0.51, 0.59, 0.92, 0.65},
+  {0.55, 0.57, 0.92, 0.65},
+  {0.59, 0.55, 0.92, 0.65},
+  {0.63, 0.53, 0.92, 0.65},
+  {0.66, 0.51, 0.92, 0.65},
+  {0.70, 0.49, 0.92, 0.65},
 
   -- {0.95, 0.36, 0.35, 0.66}, -- coral red
   -- {0.98, 0.52, 0.28, 0.66}, -- orange
@@ -111,9 +111,6 @@ function draw_music(cr, w, h)
     values = last_valid_values
   end
   if #values == 0 then
-    shadow_draw_text(cr, "NO CAVA DATA", X, BASELINE_Y, "Ubuntu Sans Mono", 24, DEBUG_TEXT_RGBA, {
-      dx = 1, dy = 1, blur_r = 1, core_alpha = 0.25, blur_alpha = 0.1, sigma = 1.5, blur_gain = 2, blur_max_a = 0.02
-    })
     return
   end
 

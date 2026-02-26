@@ -99,7 +99,12 @@ end
 local function get_cpu()
   local model = read_first_match("/proc/cpuinfo", "^model name%s*:%s*(.+)$")
   if not model then return "CPU: ?" end
+  model = model:gsub("%(R%)", "")
+  model = model:gsub("%(TM%)", "")
+  model = model:gsub("CPU", "")
+  model = model:gsub("%s+%d+C/%d+T", "")
   model = model:gsub("%s+", " ")
+  model = model:gsub("^%s+", ""):gsub("%s+$", "")
   return "CPU: " .. model
 end
 
