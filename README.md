@@ -90,5 +90,3 @@ conky -c ~/.config/conky/music/conky.conf
 ```bash
 /bin/bash /home/julie/.config/conky/scripts/start-conky.sh
 ```
-
-说明：使用 systed 启动可能存在问题。
